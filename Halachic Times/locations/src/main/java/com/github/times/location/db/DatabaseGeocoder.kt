@@ -405,7 +405,8 @@ class DatabaseGeocoder(
             // Caused by: java.lang.IllegalArgumentException: Unknown URL content://net.sf.times.debug.locations/elevation
             Timber.e(
                 e,
-                "Error inserting elevation at " + location.latitude + "," + location.longitude + ": " + e.message
+                "Error inserting elevation at %f,%f: %s",
+                location.latitude, location.longitude, e.message
             )
         }
     }
@@ -456,6 +457,7 @@ class DatabaseGeocoder(
 
     /**
      * Insert or update the city in the local database.
+     * Primarily used to store the "is favorite" flag.
      *
      * @param city the city.
      */
@@ -468,23 +470,32 @@ class DatabaseGeocoder(
         val context: Context = context
         val resolver = context.contentResolver
         var id = city.id
+        // Ignore pre-compiled addresses.
+        if (id < 0L) {
+            return
+        }
         val uri = LocationContract.Cities.CONTENT_URI(context)
         try {
             if (id == 0L) {
                 id = City.generateCityId(city)
-                values.put(BaseColumns._ID, id)
-
-                val uriWithId = resolver.insert(uri, values)
-                if (uriWithId != null) {
+            }
+            values.put(BaseColumns._ID, id)
+            val uriWithId = ContentUris.withAppendedId(uri, id)
+            // Does the address already exist?
+            val cursor = resolver.query(uriWithId, null, null, null, null)
+            if (cursor != null && cursor.moveToFirst()) {
+                if (resolver.update(uriWithId, values, null, null) > 0) {
                     city.id = id
                 }
             } else {
-                val uriWithId = ContentUris.withAppendedId(uri, id)
-                resolver.update(uriWithId, values, null, null)
+                val uriInserted = resolver.insert(uri, values)
+                if (uriInserted != null) {
+                    city.id = ContentUris.parseId(uriInserted)
+                }
             }
         } catch (e: Exception) {
             // Caused by: java.lang.IllegalArgumentException: Unknown URL content://net.sf.times.debug.locations/city
-            Timber.e(e, "Error inserting city for " + city.formatted + ": " + e.message)
+            Timber.e(e, "Error inserting city for %s: %s", city.formatted, e.message)
         }
     }
 
@@ -530,7 +541,8 @@ class DatabaseGeocoder(
             // Caused by: java.lang.IllegalArgumentException: Unknown URL content://net.sf.times.debug.locations/address
             Timber.e(
                 e,
-                "Error deleting address " + address.id + " at " + address.latitude + "," + address.longitude + ": " + e.message
+                "Error deleting address %d at %f,%f: %s",
+                address.id, address.latitude, address.longitude, e.message
             )
         }
         return false
@@ -552,7 +564,8 @@ class DatabaseGeocoder(
         } catch (e: Exception) {
             Timber.e(
                 e,
-                "Error deleting elevation at " + latitude + "," + longitude + ": " + e.message
+                "Error deleting elevation at %f,%f: %s",
+                latitude, longitude, e.message
             )
         }
         return false

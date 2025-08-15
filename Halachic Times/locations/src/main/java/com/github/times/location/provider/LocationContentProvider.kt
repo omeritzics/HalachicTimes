@@ -24,6 +24,9 @@ import android.database.DatabaseUtils
 import android.net.Uri
 import android.provider.BaseColumns
 import com.github.times.location.provider.LocationContract.Elevations
+import com.github.times.location.provider.LocationOpenHelper.Companion.TABLE_ADDRESSES
+import com.github.times.location.provider.LocationOpenHelper.Companion.TABLE_CITIES
+import com.github.times.location.provider.LocationOpenHelper.Companion.TABLE_ELEVATIONS
 
 /**
  * Location content provider.<br/>
@@ -98,7 +101,7 @@ class LocationContentProvider : ContentProvider() {
             }
 
             CODE_CITIES -> cursor = db.query(
-                LocationOpenHelper.TABLE_CITIES,
+                TABLE_CITIES,
                 projection,
                 selectionCriteria,
                 selectionArgs,
@@ -111,7 +114,7 @@ class LocationContentProvider : ContentProvider() {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
                 cursor = db.query(
-                    LocationOpenHelper.TABLE_CITIES,
+                    TABLE_CITIES,
                     projection,
                     selectionCriteria,
                     selectionArgs,
@@ -122,7 +125,7 @@ class LocationContentProvider : ContentProvider() {
             }
 
             CODE_ELEVATIONS -> cursor = db.query(
-                LocationOpenHelper.TABLE_ELEVATIONS,
+                TABLE_ELEVATIONS,
                 projection,
                 selectionCriteria,
                 selectionArgs,
@@ -135,7 +138,7 @@ class LocationContentProvider : ContentProvider() {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
                 cursor = db.query(
-                    LocationOpenHelper.TABLE_ELEVATIONS,
+                    TABLE_ELEVATIONS,
                     projection,
                     selectionCriteria,
                     selectionArgs,
@@ -160,21 +163,21 @@ class LocationContentProvider : ContentProvider() {
         when (uriMatcher.match(uri)) {
             CODE_ADDRESSES,
             CODE_ADDRESS_ID -> {
-                id = db.insert(LocationOpenHelper.TABLE_ADDRESSES, null, values)
+                id = db.insert(TABLE_ADDRESSES, null, values)
                 result =
                     ContentUris.withAppendedId(LocationContract.Addresses.CONTENT_URI(context), id)
             }
 
             CODE_CITIES,
             CODE_CITY_ID -> {
-                id = db.insert(LocationOpenHelper.TABLE_CITIES, null, values)
+                id = db.insert(TABLE_CITIES, null, values)
                 result =
                     ContentUris.withAppendedId(LocationContract.Cities.CONTENT_URI(context), id)
             }
 
             CODE_ELEVATIONS,
             CODE_ELEVATION_ID -> {
-                id = db.insert(LocationOpenHelper.TABLE_ELEVATIONS, null, values)
+                id = db.insert(TABLE_ELEVATIONS, null, values)
                 result = ContentUris.withAppendedId(Elevations.CONTENT_URI(context), id)
             }
 
@@ -193,30 +196,30 @@ class LocationContentProvider : ContentProvider() {
 
         when (uriMatcher.match(uri)) {
             CODE_ADDRESSES -> result =
-                db.delete(LocationOpenHelper.TABLE_ADDRESSES, selectionCriteria, selectionArgs)
+                db.delete(TABLE_ADDRESSES, selectionCriteria, selectionArgs)
 
             CODE_ADDRESS_ID -> {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
-                result = db.delete(LocationOpenHelper.TABLE_ADDRESSES, selectionCriteria, selectionArgs)
+                result = db.delete(TABLE_ADDRESSES, selectionCriteria, selectionArgs)
             }
 
             CODE_CITIES -> result =
-                db.delete(LocationOpenHelper.TABLE_CITIES, selectionCriteria, selectionArgs)
+                db.delete(TABLE_CITIES, selectionCriteria, selectionArgs)
 
             CODE_CITY_ID -> {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
-                result = db.delete(LocationOpenHelper.TABLE_CITIES, selectionCriteria, selectionArgs)
+                result = db.delete(TABLE_CITIES, selectionCriteria, selectionArgs)
             }
 
             CODE_ELEVATIONS -> result =
-                db.delete(LocationOpenHelper.TABLE_ELEVATIONS, selectionCriteria, selectionArgs)
+                db.delete(TABLE_ELEVATIONS, selectionCriteria, selectionArgs)
 
             CODE_ELEVATION_ID -> {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
-                result = db.delete(LocationOpenHelper.TABLE_ELEVATIONS, selectionCriteria, selectionArgs)
+                result = db.delete(TABLE_ELEVATIONS, selectionCriteria, selectionArgs)
             }
 
             else -> throw UnsupportedOperationException("Unknown uri: $uri")
@@ -241,33 +244,33 @@ class LocationContentProvider : ContentProvider() {
 
         when (uriMatcher.match(uri)) {
             CODE_ADDRESSES -> result =
-                db.update(LocationOpenHelper.TABLE_ADDRESSES, values, selectionCriteria, selectionArgs)
+                db.update(TABLE_ADDRESSES, values, selectionCriteria, selectionArgs)
 
             CODE_ADDRESS_ID -> {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
                 result =
-                    db.update(LocationOpenHelper.TABLE_ADDRESSES, values, selectionCriteria, selectionArgs)
+                    db.update(TABLE_ADDRESSES, values, selectionCriteria, selectionArgs)
             }
 
             CODE_CITIES -> result =
-                db.update(LocationOpenHelper.TABLE_CITIES, values, selectionCriteria, selectionArgs)
+                db.update(TABLE_CITIES, values, selectionCriteria, selectionArgs)
 
             CODE_CITY_ID -> {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
                 result =
-                    db.update(LocationOpenHelper.TABLE_CITIES, values, selectionCriteria, selectionArgs)
+                    db.update(TABLE_CITIES, values, selectionCriteria, selectionArgs)
             }
 
             CODE_ELEVATIONS -> result =
-                db.update(LocationOpenHelper.TABLE_ELEVATIONS, values, selectionCriteria, selectionArgs)
+                db.update(TABLE_ELEVATIONS, values, selectionCriteria, selectionArgs)
 
             CODE_ELEVATION_ID -> {
                 id = uri.lastPathSegment
                 selectionCriteria = DatabaseUtils.concatenateWhere(selectionCriteria, BaseColumns._ID + "=" + id)
                 result =
-                    db.update(LocationOpenHelper.TABLE_ELEVATIONS, values, selectionCriteria, selectionArgs)
+                    db.update(TABLE_ELEVATIONS, values, selectionCriteria, selectionArgs)
             }
 
             else -> throw UnsupportedOperationException("Unknown uri: $uri")

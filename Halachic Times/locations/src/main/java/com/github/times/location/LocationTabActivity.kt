@@ -346,6 +346,12 @@ abstract class LocationTabActivity<P : ThemePreferences> : InsetsActivity(),
             when (msg.what) {
                 WHAT_FAVORITE -> {
                     address = msg.obj as? ZmanimAddress ?: return
+                    if (address is City) {
+                        // Need to persist the pre-compiled city.
+                        if (address.id < 0L) {
+                            address.id = City.generateCityId(address)
+                        }
+                    }
                     activity.saveAddress(address)
                 }
 

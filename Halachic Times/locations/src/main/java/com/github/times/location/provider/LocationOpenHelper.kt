@@ -38,7 +38,7 @@ class LocationOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, 
         if (oldFile.exists()) {
             SQLiteDatabase.deleteDatabase(oldFile)
         }
-        var sql: String = StringBuilder()
+        val sql = StringBuilder()
             .append("CREATE TABLE ").append(TABLE_ADDRESSES).append('(')
             .append(AddressColumns._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT,")
             .append(AddressColumns.LOCATION_LATITUDE).append(" DOUBLE NOT NULL,")
@@ -50,9 +50,8 @@ class LocationOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, 
             .append(AddressColumns.TIMESTAMP).append(" INTEGER NOT NULL,")
             .append(AddressColumns.FAVORITE).append(" INTEGER NOT NULL")
             .append(");")
-            .toString()
-        db.execSQL(sql)
-        sql = StringBuilder()
+        db.execSQL(sql.toString())
+        sql.clear()
             .append("CREATE TABLE ").append(TABLE_ELEVATIONS).append('(')
             .append(ElevationColumns._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT,")
             .append(ElevationColumns.LATITUDE).append(" DOUBLE NOT NULL,")
@@ -65,16 +64,14 @@ class LocationOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, 
             .append(ElevationColumns.LONGITUDE)
             .append(") ON CONFLICT REPLACE")
             .append(");")
-            .toString()
-        db.execSQL(sql)
-        sql = StringBuilder()
+        db.execSQL(sql.toString())
+        sql.clear()
             .append("CREATE TABLE ").append(TABLE_CITIES).append('(')
             .append(CityColumns._ID).append(" INTEGER PRIMARY KEY,")
             .append(CityColumns.TIMESTAMP).append(" INTEGER NOT NULL,")
             .append(CityColumns.FAVORITE).append(" INTEGER NOT NULL")
             .append(");")
-            .toString()
-        db.execSQL(sql)
+        db.execSQL(sql.toString())
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
