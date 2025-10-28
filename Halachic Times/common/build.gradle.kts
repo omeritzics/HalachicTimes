@@ -1,15 +1,14 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    compileSdk = BuildVersions.compileSdk
+    compileSdk = libs.versions.compileSdk.toInt()
     namespace = "com.github.times.common"
 
     defaultConfig {
-        minSdk = BuildVersions.minSdk
-        targetSdk = BuildVersions.targetSdk
+        minSdk = libs.versions.minSdk.toInt()
 
         val locales = listOf(
             "ar",
@@ -72,6 +71,5 @@ android {
 dependencies {
     implementation(project(":android-lib:lib"))
 
-    testImplementation("junit:junit:${BuildVersions.junit}")
-    testImplementation("org.robolectric:robolectric:${BuildVersions.robolectric}")
+    testImplementation(libs.bundles.test)
 }

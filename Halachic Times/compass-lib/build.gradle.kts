@@ -1,15 +1,14 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    compileSdk = BuildVersions.compileSdk
+    compileSdk = libs.versions.compileSdk.toInt()
     namespace = "com.github.times.compass.lib"
 
     defaultConfig {
-        minSdk = BuildVersions.minSdk
-        targetSdk = BuildVersions.targetSdk
+        minSdk = libs.versions.minSdk.toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,8 +47,6 @@ dependencies {
     implementation(project(":locations"))
 
     // Testing
-    testImplementation("junit:junit:${BuildVersions.junit}")
-    testImplementation("org.robolectric:robolectric:${BuildVersions.robolectric}")
-    androidTestImplementation("androidx.test:core-ktx:${BuildVersions.androidTest}")
-    androidTestImplementation("androidx.test:rules:${BuildVersions.androidTest}")
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.test.android)
 }

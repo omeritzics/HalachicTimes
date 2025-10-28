@@ -2,9 +2,9 @@ import com.android.build.api.dsl.LibraryDefaultConfig
 import java.util.Base64
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("plugin.serialization") version BuildVersions.kotlin
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 fun LibraryDefaultConfig.encodeApiKey(name: String) {
@@ -15,12 +15,11 @@ fun LibraryDefaultConfig.encodeApiKey(name: String) {
 }
 
 android {
-    compileSdk = BuildVersions.compileSdk
+    compileSdk = libs.versions.compileSdk.toInt()
     namespace = "com.github.times.location"
 
     defaultConfig {
-        minSdk = BuildVersions.minSdk
-        targetSdk = BuildVersions.targetSdk
+        minSdk = libs.versions.minSdk.toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         encodeApiKey("BING_API_KEY")
@@ -70,17 +69,13 @@ dependencies {
     implementation(project(":common"))
 
     // Maps
-    implementation("com.google.maps:google-maps-services:2.1.0")
-    implementation("androidx.cardview:cardview:1.0.0")
+    implementation(libs.google.maps)
+    implementation(libs.cardview)
 
     // Background tasks
-    implementation("androidx.work:work-runtime:${BuildVersions.work}")
+    implementation(libs.work.runtime)
 
-    // Testing
-    testImplementation("junit:junit:${BuildVersions.junit}")
-    testImplementation("org.robolectric:robolectric:${BuildVersions.robolectric}")
+    testImplementation(libs.bundles.test)
     testImplementation(kotlin("reflect"))
-    androidTestImplementation("androidx.test:core-ktx:${BuildVersions.androidTest}")
-    androidTestImplementation("androidx.test:rules:${BuildVersions.androidTest}")
-    androidTestImplementation("androidx.test.ext:junit:${BuildVersions.junitExt}")
+    androidTestImplementation(libs.bundles.test.android)
 }

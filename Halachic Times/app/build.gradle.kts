@@ -2,25 +2,24 @@ import org.jetbrains.kotlin.gradle.plugin.extraProperties
 import java.util.Locale
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
-
-    // Add the Firebase Crashlytics plugin.
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.crashlytics)
+    alias(libs.plugins.google.services)
 }
 
 val versionMajor = project.properties["APP_VERSION_MAJOR"].toString().toInt()
 val versionMinor = project.properties["APP_VERSION_MINOR"].toString().toInt()
 
 android {
-    compileSdk = BuildVersions.compileSdk
+    compileSdk = libs.versions.compileSdk.toInt()
     namespace = "com.github.times"
 
     defaultConfig {
         applicationId = "net.sf.times"
-        minSdk = BuildVersions.minSdk
-        targetSdk = BuildVersions.targetSdk
+        minSdk = libs.versions.minSdk.toInt()
+        targetSdk = libs.versions.targetSdk.toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         versionCode = versionMajor * 100 + versionMinor
         versionName = "${versionMajor}." + versionMinor.toString().padStart(2, '0')
@@ -150,15 +149,12 @@ dependencies {
     implementation(project(":compass-lib"))
 
     // Background tasks
-    implementation("androidx.work:work-runtime:${BuildVersions.work}")
+    implementation(libs.work.runtime)
 
     // Testing
-    testImplementation("junit:junit:${BuildVersions.junit}")
-    testImplementation("org.robolectric:robolectric:${BuildVersions.robolectric}")
-    androidTestImplementation("androidx.test:core-ktx:${BuildVersions.androidTest}")
-    androidTestImplementation("androidx.test:rules:${BuildVersions.androidTest}")
-    /// Declare the dependencies for the Crashlytics and Analytics libraries
-    implementation("com.google.firebase:firebase-crashlytics:19.3.0")
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.test.android)
+    implementation(libs.crashlytics)
 }
 
 // Disable Google Services plugin for some flavors.

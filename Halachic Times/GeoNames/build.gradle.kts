@@ -2,12 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     application
-    kotlin("jvm")
-    kotlin("plugin.serialization") version BuildVersions.kotlin
-}
-
-repositories {
-    mavenCentral()
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 application {
@@ -42,8 +38,7 @@ dependencies {
     implementation(project(":android-lib:kvm"))
 
     // Maps
-    implementation("com.google.maps:google-maps-services:2.1.0")
+    implementation(libs.google.maps)
 
-    // Testing
-    testImplementation("junit:junit:${BuildVersions.junit}")
+    testImplementation(libs.bundles.test)
 }

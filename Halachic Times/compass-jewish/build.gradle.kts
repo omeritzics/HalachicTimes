@@ -1,19 +1,19 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 val versionMajor = project.properties["APP_VERSION_MAJOR"].toString().toInt()
 val versionMinor = project.properties["APP_VERSION_MINOR"].toString().toInt()
 
 android {
-    compileSdk = BuildVersions.compileSdk
+    compileSdk = libs.versions.compileSdk.toInt()
     namespace = "com.github.compass.jewish"
 
     defaultConfig {
         applicationId = "net.sf.times.compass"
-        minSdk = BuildVersions.minSdk
-        targetSdk = BuildVersions.targetSdk
+        minSdk = libs.versions.minSdk.toInt()
+        targetSdk = libs.versions.targetSdk.toInt()
         versionCode = versionMajor * 100 + versionMinor
         versionName = "${versionMajor}." + versionMinor.toString().padStart(2, '0')
     }
