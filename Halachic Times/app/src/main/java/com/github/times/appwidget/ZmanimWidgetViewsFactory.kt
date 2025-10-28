@@ -56,7 +56,7 @@ class ZmanimWidgetViewsFactory(
 
     private val packageName = context.packageName
     private val preferences: ZmanimPreferences = SimpleZmanimPreferences(context)
-    private val items: MutableList<ZmanimItem> = ArrayList()
+    private var items: List<ZmanimItem> = emptyList()
     private val isDirectionRTL: Boolean = context.isLocaleRTL()
 
     @ColorInt
@@ -84,8 +84,8 @@ class ZmanimWidgetViewsFactory(
         if (position < 0 || position >= items.size) {
             return null
         }
-        val item = items[position]
         val view: RemoteViews
+        val item: ZmanimItem = items[position]
         if (item.isCategory) {
             view = RemoteViews(packageName, R.layout.widget_date)
             bindViewGrouping(view, item.timeLabel)
@@ -132,11 +132,12 @@ class ZmanimWidgetViewsFactory(
             populate(adapter, false)
         }
 
-        val items: MutableList<ZmanimItem> = ArrayList()
+        val items = mutableListOf<ZmanimItem>()
         var jcal = adapter.jewishCalendar!!
-        val itemToday = ZmanimItem(adapter.formatDate(context, jcal))
-        itemToday.jewishDate = jcal
-        items.add(itemToday)
+        ZmanimItem(adapter.formatDate(context, jcal)).apply {
+            jewishDate = jcal
+            items.add(this)
+        }
 
         val dayOfWeekToday = adapter.dayOfWeek
         val holidayToday = adapter.holidayToday
@@ -206,8 +207,7 @@ class ZmanimWidgetViewsFactory(
                 items.add(item)
             }
         }
-        this.items.clear()
-        this.items.addAll(items)
+        this.items = items
     }
 
     /**
