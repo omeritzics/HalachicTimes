@@ -119,7 +119,7 @@ class ZmanimTests : BaseTests() {
             isUseElevation = true
         }
         val dawn1 = cal1.alosHashachar
-        val mid1 = cal1.chatzos
+        val mid1 = cal1.chatzot
         assertNotNull(mid1!!)
         assertEquals(1712509077326L, mid1.time)
 
@@ -140,7 +140,7 @@ class ZmanimTests : BaseTests() {
             isUseElevation = true
         }
         val dawn2 = cal2.alosHashachar
-        val mid2 = cal2.chatzos
+        val mid2 = cal2.chatzot
 
         val diffDawnMillis = (dawn1 - dawn2).absoluteValue
         assertEquals(86_289_833L, diffDawnMillis)

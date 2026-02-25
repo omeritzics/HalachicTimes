@@ -362,7 +362,7 @@ interface ZmanimPreferences : ThemePreferences, LocalePreferences {
     val destroyChametz: String?
 
     /**
-     * Get the opinion for noon (*chatzos*).
+     * Get the opinion for noon (*chatzot*).
      *
      * @return the opinion.
      */
@@ -481,7 +481,7 @@ interface ZmanimPreferences : ThemePreferences, LocalePreferences {
     val fastEndsNightfall: String?
 
     /**
-     * Get the opinion for midnight (*chatzos layla*).
+     * Get the opinion for midnight (*chatzot layla*).
      *
      * @return the opinion.
      */

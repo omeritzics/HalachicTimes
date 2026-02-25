@@ -54,7 +54,7 @@
     <string name="shema_3">Előtt 3 órával dél</string>
     <string name="shema_fixed">Előtt 3 órával rögzített helyi dél</string>
 
-    <!-- Latest shacharis -->
+    <!-- Latest shacharit -->
     <string name="prayers">Legutóbbi reggeli imádság</string>
     <string name="prayers_fixed">Előtt 2 órával rögzített helyi dél</string>
     <string name="prayers_2">Előtt 2 órával dél</string>

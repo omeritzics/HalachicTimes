@@ -346,7 +346,7 @@ class ZmanimDetailsPopulater<A : ZmanimAdapter<ZmanDetailsViewHolder>>(
         title = R.string.shema_ateret
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
 
-        date = cal.sofZmanShma3HoursBeforeChatzos
+        date = cal.sofZmanShma3HoursBeforeChatzot
         title = R.string.shema_3
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
 
@@ -415,7 +415,7 @@ class ZmanimDetailsPopulater<A : ZmanimAdapter<ZmanDetailsViewHolder>>(
         title = R.string.prayers_72_zmanis
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
 
-        date = cal.sofZmanTfila2HoursBeforeChatzos
+        date = cal.sofZmanTfila2HoursBeforeChatzot
         title = R.string.prayers_2
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
 
@@ -432,15 +432,15 @@ class ZmanimDetailsPopulater<A : ZmanimAdapter<ZmanDetailsViewHolder>>(
         var date: KosherDate
         var title: Int
 
-        date = cal.chatzosBaalHatanya
+        date = cal.chatzotBaalHatanya
         title = R.string.midday_baal_hatanya
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
 
-        date = cal.fixedLocalChatzos
+        date = cal.fixedLocalChatzot
         title = R.string.midday_fixed
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
 
-        date = cal.chatzos
+        date = cal.chatzot
         title = R.string.midday_solar
         adapter.add(title, SUMMARY_NONE, date, jewishDate)
     }

@@ -374,7 +374,7 @@ open class ZmanimPopulater<A : ZmanimAdapter<*>>(
             }
 
             OPINION_3 -> {
-                date = cal.sofZmanShma3HoursBeforeChatzos
+                date = cal.sofZmanShma3HoursBeforeChatzot
                 summary = R.string.shema_3
             }
 
@@ -457,7 +457,7 @@ open class ZmanimPopulater<A : ZmanimAdapter<*>>(
             }
 
             OPINION_2 -> {
-                date = cal.sofZmanTfila2HoursBeforeChatzos
+                date = cal.sofZmanTfila2HoursBeforeChatzot
                 summary = R.string.prayers_2
             }
 
@@ -1265,17 +1265,17 @@ open class ZmanimPopulater<A : ZmanimAdapter<*>>(
         val summary: Int
         when (opinion) {
             OPINION_FIXED -> {
-                date = cal.fixedLocalChatzos
+                date = cal.fixedLocalChatzot
                 summary = R.string.midday_fixed
             }
 
             OPINION_BAAL_HATANYA -> {
-                date = cal.chatzosBaalHatanya
+                date = cal.chatzotBaalHatanya
                 summary = R.string.midday_baal_hatanya
             }
 
             else -> {
-                date = cal.chatzos
+                date = cal.chatzot
                 summary = R.string.midday_solar
             }
         }

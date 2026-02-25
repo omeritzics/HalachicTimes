@@ -54,7 +54,7 @@
     <string name="shema_3">3 tundi enne keskpäeva</string>
     <string name="shema_fixed">3 tundi enne fikseeritud kohalike keskpäeva</string>
 
-    <!-- Latest shacharis -->
+    <!-- Latest shacharit -->
     <string name="prayers">Viimane hommikul palvetes</string>
     <string name="prayers_fixed">2 tundi enne fikseeritud kohalike keskpäeva</string>
     <string name="prayers_2">2 tundi enne keskpäeva</string>

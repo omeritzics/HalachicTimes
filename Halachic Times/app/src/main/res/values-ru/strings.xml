@@ -54,7 +54,7 @@
     <string name="shema_3">3 часа до полудня</string>
     <string name="shema_fixed">3 часа до местного фикс. полудня</string>
 
-    <!-- Latest shacharis -->
+    <!-- Latest shacharit -->
     <string name="prayers">Самое позднее время для утренние молитвы</string>
     <string name="prayers_fixed">2 часа до местного фикс. полудня</string>
     <string name="prayers_2">2 часа до полудня</string>

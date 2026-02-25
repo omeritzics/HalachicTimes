@@ -148,6 +148,9 @@ dependencies {
     implementation(project(":locations"))
     implementation(project(":compass-lib"))
 
+    // Material Design
+    implementation(libs.material)
+
     // Background tasks
     implementation(libs.work.runtime)
 

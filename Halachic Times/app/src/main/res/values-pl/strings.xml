@@ -54,7 +54,7 @@
     <string name="shema_3">3 godziny jeszcze przed południem</string>
     <string name="shema_fixed">3 godziny przed stałym lokalnym południem</string>
 
-    <!-- Latest shacharis -->
+    <!-- Latest shacharit -->
     <string name="prayers">Ostatnia poranne modlitwy</string>
     <string name="prayers_fixed">2 godziny przed stałym lokalnym południem</string>
     <string name="prayers_2">2 godziny jeszcze przed południem</string>
